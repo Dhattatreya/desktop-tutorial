@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>FAQ Jokes</title>
+  <style>
+    body {
+
+      import React,
+      {
+      useState
+    }
+
+    from "react";
+
+    import {
+      motion,
+      AnimatePresence
+    }
+
+    from "framer-motion";
+
+    const faqs=[ {
+      q: "Why shouldn't we trust atoms?",
+        a: "They make up everything",
+    }
+
+    ,
+    {
+    q: "What do you call someone with no body and no nose?",
+      a: "Nobody knows.",
+    }
+
+    ,
+    {
+    q: "What's the object-oriented way to become wealthy?",
+      a: "Inheritance.",
+    }
+
+    ,
+    {
+    q: "How many tickles does it take to tickle an octopus?",
+      a: "Ten-tickles.",
+    }
+
+    ,
+    {
+    q: "What is: 1 + 1?",
+      a: "Window (if you're feeling creative) or 2 (if you're not!).",
+    }
+
+    ,
+    ];
+
+    export default function FAQ() {
+      const [openIndex,
+      setOpenIndex]=useState(null);
+
+      const toggleFaq=(index)=> {
+        setOpenIndex(openIndex===index ? null : index);
+      }
+
+      ;
+
+      return (<div className="min-h-screen flex justify-center bg-gray-100 p-10" > <div className="w-full max-w-lg" > <h1 className="text-2xl font-bold text-center mb-6" > Frequently Asked Questions </h1> {
+          faqs.map((faq, index)=> (<div key= {
+                index
+              }
+
+              className="bg-white rounded-xl shadow-md p-5 mb-4 cursor-pointer"
+
+              onClick= {
+                ()=> toggleFaq(index)
+              }
+
+              > {
+                /* Question Row */
+              }
+
+              <div className="flex justify-between items-center font-semibold" > <span> {
+                faq.q
+              }
+
+              </span> <motion.span animate= {
+                  {
+                  rotate: openIndex===index ? 180 : 0
+                }
+              }
+
+              transition= {
+                  {
+                  duration: 0.3
+                }
+              }
+
+              className="text-xl"
+
+              > ⬇️ </motion.span> </div> {
+                /* Answer with Animation */
+              }
+
+              <AnimatePresence> {
+                openIndex===index && (<motion.div initial= {
+                      {
+                      height: 0, opacity: 0
+                    }
+                  }
+
+                  animate= {
+                      {
+                      height: "auto", opacity: 1
+                    }
+                  }
+
+                  exit= {
+                      {
+                      height: 0, opacity: 0
+                    }
+                  }
+
+                  transition= {
+                      {
+                      duration: 0.3
+                    }
+                  }
+
+                  className="text-gray-600 mt-3 overflow-hidden"
+
+                  > {
+                    faq.a
+                  }
+
+                  </motion.div>)
+              }
+
+              </AnimatePresence> </div>))
+        }
+
+        </div> </div>);
+    }
+
+      {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .faq-container {
+      width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .faq {
+      background: white;
+      border-radius: 8px;
+      margin: 10px 0;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+      color: #444;
+      margin-top: 10px;
+    }
+
+    .faq.open .answer {
+      max-height: 200px;
+      /* enough space for answers */
+      opacity: 1;
+    }
+
+    .icon {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq.open .icon {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="faq-container">
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq">
+      <div class="question" onclick="toggleFaq(this)">
+        <span>Why shouldn't we trust atoms?</span>
+        <span class="icon">⬇️</span>
+      </div>
+      <div class="answer">They make up everything</div>
+    </div>
+
+    <div class="faq">
+      <div class="question" onclick="toggleFaq(this)">
+        <span>What do you call someone with no body and no nose?</span>
+        <span class="icon">⬇️</span>
+      </div>
+      <div class="answer">Nobody knows.</div>
+    </div>
+
+    <div class="faq">
+      <div class="question" onclick="toggleFaq(this)">
+        <span>What's the object-oriented way to become wealthy?</span>
+        <span class="icon">⬇️</span>
+      </div>
+      <div class="answer">Inheritance.</div>
+    </div>
+
+    <div class="faq">
+      <div class="question" onclick="toggleFaq(this)">
+        <span>How many tickles does it take to tickle an octopus?</span>
+        <span class="icon">⬇️</span>
+      </div>
+      <div class="answer">Ten-tickles.</div>
+    </div>
+
+    <div class="faq">
+      <div class="question" onclick="toggleFaq(this)">
+        <span>What is: 1 + 1?</span>
+        <span class="icon">⬇️</span>
+      </div>
+      <div class="answer">Window (if you're feeling creative) or 2 (if you're not!).</div>
+    </div>
+  </div>
+
+  <script>
+    function toggleFaq(element) {
+      const faq = element.closest('.faq');
+      faq.classList.toggle('open');
+    }
+  </script>
+</body>
+
+</html>
